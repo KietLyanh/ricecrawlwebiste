@@ -3,10 +3,11 @@ import Header from './components/Layouts/Header'
 import { Text } from '@chakra-ui/react'
 import ProtectedRoute from './middlewares/ProtectedRouter'
 import Contact from './components/Contact'
+import AdminRouter from './middlewares/AdminRouter'
 export const routes = [
   { path: '/', element: <Header /> },
   {
-    path: '/myCV',
+    path: '/crawl-data',
     element: (
       <ProtectedRoute>
         <Main />
@@ -25,6 +26,10 @@ export const routes = [
   },
   {
     path: '/admin',
-    element: <Contact />,
+    element: (
+      <AdminRouter>
+        <Contact />
+      </AdminRouter>
+    ),
   },
 ]

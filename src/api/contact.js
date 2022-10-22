@@ -6,7 +6,7 @@ export const contact = (data) => {
 }
 export const getAllFilesApi = () => {
   return axios.get(
-    'http://dashboard.ulake.usth.edu.vn/api/folder/158951/entries',
+    'http://dashboard.ulake.usth.edu.vn/api/folder/161190/entries',
     {
       headers: {
         'Content-Type': 'application/json',

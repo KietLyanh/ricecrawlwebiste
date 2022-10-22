@@ -87,7 +87,7 @@ const Navbar = () => {
           <Text as="a" href="/" fontSize="lg">
             Home
           </Text>
-          <Text as="a" href="myCV" fontSize="lg">
+          <Text as="a" href="crawl-data" fontSize="lg">
             Crawl Table
           </Text>
           <Text as="a" href={`/admin`} fontSize="lg">

@@ -44,7 +44,7 @@ const Header = () => {
             >
               <Button
                 as={'a'}
-                href={'/myCV'}
+                href={'/crawl-data'}
                 rounded={'md'}
                 size={'lg'}
                 px={6}

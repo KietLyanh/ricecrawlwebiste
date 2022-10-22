@@ -4,6 +4,7 @@ export const getCSV = (dataCsv) => {
   let arrData = []
   const arr = String(dataCsv).replace(',-,,', '')
   const test = arr?.split('\r\n')
+  console.log(test)
   for (let i = 0; i < test?.length - 1; i++) {
     arrData?.push(test[i].split(','))
   }

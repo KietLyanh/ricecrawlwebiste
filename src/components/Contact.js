@@ -21,10 +21,13 @@ import { getAllFilesApi, updateCsv } from '../api/contact'
 import CustomTable from './CustomTable'
 import moment from 'moment'
 import { MdUpdate } from 'react-icons/md'
+import { useToast } from '@chakra-ui/react'
 
 const Contact = () => {
   const [loading, setLoading] = useState(false)
   const [files, setFiles] = useState([])
+  const [loadingBtn, setLoadingBtn] = useState(false)
+  const toast = useToast()
 
   const getAllFiles = async () => {
     setLoading(true)
@@ -54,14 +57,24 @@ const Contact = () => {
   const dataHeader = useMemo(() => {
     return [
       { Header: 'ID', accessor: 'id' },
+      { Header: 'Name', accessor: 'name' },
       { Header: 'Type', accessor: 'mime' },
       { Header: 'Size', accessor: 'size' },
       { Header: 'Creation Time', accessor: 'creationTime' },
     ]
   }, [])
   const handleUpdate = async () => {
+    setLoadingBtn(true)
     try {
       const res = await updateCsv()
+      setLoadingBtn(false)
+      toast({
+        title: 'Updated',
+        description: "We've updated your csv file.",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
       console.log(res)
     } catch (error) {
       console.log(error)
@@ -87,6 +100,7 @@ const Contact = () => {
           </Center>
           <Center>
             <Button
+              isLoading={loadingBtn}
               w={'25%'}
               h={'37'}
               colorScheme="pink"

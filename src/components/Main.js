@@ -43,28 +43,35 @@ const Main = () => {
           },
         }
       )
-
       const rawResponse = await response.text()
       const dataFormat = getCSV(rawResponse)
-      setDataHeader(
-        dataFormat[0].map((d, i) => {
-          return { Header: d, accessor: _.camelCase(d) }
-        })
-      )
-
-      setDataCsv(
-        makeData(
-          dataFormat,
+      if (dataFormat[0]) {
+        setDataHeader(
           dataFormat[0].map((d, i) => {
             return { Header: d, accessor: _.camelCase(d) }
           })
         )
-      )
+
+        setDataCsv(
+          makeData(
+            dataFormat,
+            dataFormat[0].map((d, i) => {
+              return { Header: d, accessor: _.camelCase(d) }
+            })
+          )
+        )
+      }
       setLoading(false)
     } catch (error) {
+      console.log(error)
       setLoading(false)
-      toast.error(error.response)
-      return
+      toast({
+        title: 'Error',
+        description: 'Unexpected Error',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
     }
   }
   const getAllFiles = async () => {
@@ -90,10 +97,7 @@ const Main = () => {
       }
       const data = [...dataCsv]
       console.log(data)
-      setDataCsv([
-        ...[dataCsv[0]],
-        ...data?.filter((d) => searchInObject(d, e.target.value)),
-      ])
+      setDataCsv([...data?.filter((d) => searchInObject(d, e.target.value))])
     }
   }
   useEffect(() => {
